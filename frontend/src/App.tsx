@@ -1,19 +1,13 @@
-import { useEffect, useState } from 'react'
-
+import { Route, Routes } from 'react-router-dom'
+import NavBar from './components/navigation/NavBar'
+import Login from './components/auth/login'
 function App() {
-  const [books, setBooks] = useState<any>()
-
-  useEffect(() => {
-    fetch(`http://localhost:5566/books`)
-      .then((res) => res.json())
-      .then((data) => setBooks(data))
-      .catch((err) => console.log(err))
-  }, [])
-
   return (
-    <section>
-      <button onClick={() => console.log(books)}>check</button>
-    </section>
+    <>
+      <NavBar />
+      <Login />
+      <Routes></Routes>
+    </>
   )
 }
 

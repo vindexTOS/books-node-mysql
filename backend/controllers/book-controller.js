@@ -1,5 +1,4 @@
-import db from '../contact/contact_db'
-import { BookType } from '../types/books-types'
+import db from '../contact/contact_db.js'
 export const GetBooks = async (req, res) => {
   const q = 'SELECT * FROM books'
 

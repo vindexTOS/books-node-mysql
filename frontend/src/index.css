@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.nav-bar-bg {
+  background: rgb(255, 117, 88);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 117, 88, 1) 0%,
+    rgba(255, 83, 119, 1) 100%
+  );
+}
