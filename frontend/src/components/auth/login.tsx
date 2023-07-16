@@ -4,7 +4,9 @@ import Icon from '../../assets/icons/books.png'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { RegisterObj } from '../../types/Auth-types'
 import { Register } from '../../api/Auth-api'
+import { useForm } from 'react-hook-form'
 const Login = () => {
+  const { register, getValues } = useForm()
   const {
     authPopUpRef,
     authPopUp,
@@ -28,6 +30,14 @@ const Login = () => {
   const mutation = useMutation((registerObj: RegisterObj) =>
     Register(registerObj),
   )
+
+  const handleRegister = () => {
+    mutation.mutate({
+      username: getValues('name'),
+      password: getValues('password'),
+      email: getValues('email'),
+    })
+  }
   return (
     <section className={style.section}>
       <div ref={authPopUpRef} className={style.mainDiv}>
@@ -41,9 +51,10 @@ const Login = () => {
           </p>
         </div>
         <div className={style.inputDivWrapper}>
-          {!registerSwitch && (
+          {registerSwitch && (
             <div className={style.inputDiv}>
               <input
+                {...register('name')}
                 className="outline-none"
                 type="text"
                 placeholder="Your Name"
@@ -51,17 +62,29 @@ const Login = () => {
             </div>
           )}
           <div className={style.inputDiv}>
-            <input className="outline-none" type="email" placeholder="Email" />
+            <input
+              {...register('email')}
+              className="outline-none"
+              type="email"
+              placeholder="Email"
+            />
           </div>
           <div className={style.inputDiv}>
             <input
+              {...register('password')}
               className="outline-none"
               type="password"
               placeholder="Password"
             />
           </div>
 
-          <button className={style.btn}>Continue</button>
+          {registerSwitch ? (
+            <button onClick={handleRegister} className={style.btn}>
+              Register
+            </button>
+          ) : (
+            <button className={style.btn}>Login</button>
+          )}
         </div>
 
         {!registerSwitch ? (
