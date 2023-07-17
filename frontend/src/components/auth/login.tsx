@@ -1,17 +1,18 @@
 import React from 'react'
 import { UseMainContext } from '../../context'
 import Icon from '../../assets/icons/books.png'
-import { useMutation, useQuery } from '@tanstack/react-query'
-import { RegisterObj } from '../../types/Auth-types'
-import { Register } from '../../api/Auth-api'
+
 import { useForm } from 'react-hook-form'
+
 const Login = () => {
-  const { register, getValues } = useForm()
   const {
+    register,
     authPopUpRef,
     authPopUp,
     registerSwitch,
     setRegisterSwitch,
+    handleRegister,
+    handleLogin,
   } = UseMainContext()
   const style = {
     section: `w-[100%] h-[100vh] bg-black/30 absolute top-0 flex items-center justify-center ${
@@ -27,17 +28,6 @@ const Login = () => {
     btnRegister: `text-white bg-[#ff5377] hover:bg-gradient-to-br focus:ring-4 focus:outline-none focus:ring-pink-300 dark:focus:ring-pink-800 shadow-lg shadow-[#ff5377]-500/50 dark:shadow-lg dark:shadow-[#ff7558]/80 font-medium rounded-lg text-sm  text-center  w-[50%] h-[2.5rem]`,
   }
 
-  const mutation = useMutation((registerObj: RegisterObj) =>
-    Register(registerObj),
-  )
-
-  const handleRegister = () => {
-    mutation.mutate({
-      username: getValues('name'),
-      password: getValues('password'),
-      email: getValues('email'),
-    })
-  }
   return (
     <section className={style.section}>
       <div ref={authPopUpRef} className={style.mainDiv}>
@@ -83,7 +73,9 @@ const Login = () => {
               Register
             </button>
           ) : (
-            <button className={style.btn}>Login</button>
+            <button onClick={handleLogin} className={style.btn}>
+              Login
+            </button>
           )}
         </div>
 

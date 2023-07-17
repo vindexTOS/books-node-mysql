@@ -3,3 +3,8 @@ export type RegisterObj = {
   password: string
   email: string
 }
+
+export type LoginObj = {
+  email:string 
+  password:string 
+}

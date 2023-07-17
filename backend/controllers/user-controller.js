@@ -49,7 +49,7 @@ export const Login = async (req, res) => {
     const connection = await db
     const [rows] = await connection.query(getUser, [email])
     const user = rows[0]
-
+    console.log(user)
     if (!user) {
       return res.status(400).json({ msg: 'User Does Not Exist ' })
     }
